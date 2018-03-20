@@ -1,13 +1,14 @@
 # coding=utf-8
 import logging
 import logging.handlers
+
 import tornado.log
 
 FILE = dict(
-    log_path="logs/log", # 末尾自动添加 @端口号.txt_日期
-    when="D", # 以什么单位分割文件
-    interval=1, # 以上面的时间单位，隔几个单位分割文件
-    backupCount=30, # 保留多少历史记录文件
+    log_path="logs/log",  # 末尾自动添加 @端口号.txt_日期
+    when="D",  # 以什么单位分割文件
+    interval=1,  # 以上面的时间单位，隔几个单位分割文件
+    backupCount=30,  # 保留多少历史记录文件
     fmt="%(asctime)s - %(name)s - %(filename)s[line:%(lineno)d] - %(levelname)s - %(message)s",
 )
 
@@ -24,8 +25,8 @@ def init(port, console_handler=False, file_handler=True, log_path=FILE['log_path
     if file_handler:
         if not log_path:
             log_path = FILE['log_path']
-        log_path = log_path+"@"+str(port)+".txt"
-        formatter = logging.Formatter(FILE['fmt']);
+        log_path = log_path + "@" + str(port) + ".txt"
+        formatter = logging.Formatter(FILE['fmt'])
         channel_file = logging.handlers.TimedRotatingFileHandler(
             filename=log_path,
             when=FILE['when'],
